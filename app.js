@@ -20,7 +20,7 @@ board.on("ready", function() {
 	  //once a change happens, reset current min 
 	  currentMin = new Date().getMinutes();
 	  //check if currentmin is not equal to before the change happened
-	  if (new Date().getSeconds() == 0)
+	  if (new Date().getSeconds() == 0 && currentMin != pastMin)
 	  {	
 		 //var send = count;
 		 axios.post('https://enigmatic-taiga-10166.herokuapp.com/addData', {
