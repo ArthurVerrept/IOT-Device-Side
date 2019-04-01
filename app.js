@@ -20,17 +20,22 @@ board.on("ready", function() {
 	  //once a change happens, reset current min 
 	  currentMin = new Date().getMinutes();
 	  //check if currentmin is not equal to before the change happened
-	  if (new Date().getSeconds() == 0 && currentMin != pastMin)
+	  if (currentMin != pastMin || new Date().getSeconds == 0 && count > 50)
 	  {	
-		 //var send = count;
-		 axios.post('https://enigmatic-taiga-10166.herokuapp.com/addData', {
-			 count: count,
-			 date: myDate()
-		 });
-		 //if they are not equal a post request must be made sending the total for prev minute
-		 //after post request is made reset count and start new 
-		  count = 1;
-		  pastMin = new Date().getMinutes();
+	      axios.post('https://enigmatic-taiga-10166.herokuapp.com/addData', {
+	      count: count,
+	      hour: new Date().getHours(),
+	      minute: new Date().getMinutes()-1,
+	      second: 0,
+	      day: new Date().getDate(),
+	      month: new Date().getMonth(),
+	      year: new Date().getFullYear()
+	      
+	    });
+	  //if they are not equal a post request must be made sending the total for prev minute
+	  //after post request is made reset count and start new 
+	  count = 1;
+	  pastMin = new Date().getMinutes();
 	  }
 	  else
 	  {
@@ -47,14 +52,10 @@ function myDate(){
 	var d = new Date().getDate();
 	var m = new Date().getMonth();
 	var y = new Date().getFullYear();
-	
-	var h = new Date().getHours();
-	var min = new Date().getMinutes();
-	var s = new Date().getSeconds();
-	
-	m+= 1;
-	var n =  d + ":" + m + ":" + y + "  " + h + ":" + min +":"+ s;
-	n.toString();
-	return n;
 
+	return date={
+	  day: d,
+	  month: m,
+	  year: y
+	}
 }
