@@ -24,8 +24,9 @@ board.on("ready", function() {
 	  {	
 	      axios.post('https://enigmatic-taiga-10166.herokuapp.com/addData', {
 	      count: count,
+	      fullTime: new Date().toLocaleTimeString(),
 	      hour: new Date().getHours(),
-	      minute: new Date().getMinutes()-1,
+	      minute: new Date().getMinutes(),
 	      second: 0,
 	      day: new Date().getDate(),
 	      month: new Date().getMonth(),
